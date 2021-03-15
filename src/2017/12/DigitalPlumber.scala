@@ -1,5 +1,5 @@
 
-object DigitalPlumber_2_func {
+object DigitalPlumber {
 
   def main(args: Array[String]) {
 
@@ -8,6 +8,12 @@ object DigitalPlumber_2_func {
 
     val data: Map[Int, Seq[Int]] = longInput.split("\n").map(programIdsFromLine).toMap
 
+    //  Part 1
+    val result = nProgramGroups(data, Seq[Int](), 0).size
+    println("RESULT 1:")
+    println(result)
+
+    //  Part 2
     var addedPrograms = Set[Int]()
     val groups = for {
       (key, values) <- data
@@ -17,7 +23,7 @@ object DigitalPlumber_2_func {
       addedPrograms = addedPrograms ++ group
       group
     }
-    println("RESULT")
+    println("RESULT 2:")
     println(groups.size)
   }
 
@@ -26,10 +32,8 @@ object DigitalPlumber_2_func {
     (key.toInt -> values.split(", ").map(_.toInt))
   }
 
-
   def nProgramGroups(data: Map[Int, Seq[Int]], group: Seq[Int], programId: Int): Set[Int] = {
     val subGroup = data(programId).filter(!group.contains(_)).toSet
     subGroup ++ subGroup.map(x => nProgramGroups(data, (group ++ subGroup).distinct, x)).flatten
   }
-
 }
