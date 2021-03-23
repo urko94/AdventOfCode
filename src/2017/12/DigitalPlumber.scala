@@ -14,15 +14,14 @@ object DigitalPlumber {
     println(result)
 
     //  Part 2
-    var addedPrograms = Set[Int]()
-    val groups = for {
-      (key, values) <- programs
-      if !addedPrograms.contains(key)
-    } yield {
-      val group = programGroupFromPrograms(programs, Set[Int](), key)
-      addedPrograms = addedPrograms ++ group
-      group
-    }
+    val groups = programs.foldLeft(List[Set[Int]]())((acc, element) => {
+      if (!acc.flatten.contains(element._1)) {
+        acc :+ programGroupFromPrograms(programs, Set[Int](), element._1)
+      }
+      else {
+        acc
+      }
+    })
     println("RESULT 2:")
     println(groups.size)
   }

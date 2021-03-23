@@ -8,18 +8,16 @@ object DigitalPlumber_2_func {
 
     val programs: Map[Int, Set[Int]] = longInput.linesIterator.map(programIdsFromLine).toMap
 
-    var addedPrograms = Set[Int]()
-    val programGroups = for {
-      (key, values) <- programs
-      if !addedPrograms.contains(key)
-    } yield {
-      val programGroup = programGroupFromPrograms(programs, Set[Int](), key)
-      addedPrograms = addedPrograms ++ programGroup
-      programGroup
-    }
-
+    val groups = programs.foldLeft(List[Set[Int]]())((acc, element) => {
+      if (!acc.flatten.contains(element._1)) {
+        acc :+ programGroupFromPrograms(programs, Set[Int](), element._1)
+      }
+      else {
+        acc
+      }
+    })
     println("RESULT")
-    println(programGroups.size)
+    println(groups.size)
   }
 
   def programIdsFromLine(line: String): (Int, Set[Int]) = {
