@@ -8,7 +8,11 @@ object AirDuctSpelunking {
     val input: String = "###########\n#0.1.....2#\n#.#######.#\n#4.......3#\n###########"
     val longInput: String = "#####################################################################################################################################################################################\n#.....#.#.....#.#.#...#.....#.#.#.#.....#3......#...........#.#.....#.....#.............#.#...#...#.....#...#.........#.#...............#.....#.....#.........................#.....#\n#.#.#.#.#.#.#.#.#.#.#.#.###.#.#.#.#.#.#####.#.#.#.#####.#.###.#.#.###.#.#####.###.#.#.#.#.#####.#.#.#.#####.#.#.#####.#.#.#####.###.#.#.###.###.###.#.###.#.###.###.#.#######.#######\n#.....#...#.#.....#...#.........#...........#.......#...#.#.....#.....#.#.#.......#...#.#...#...#...#.#...#...#.#...#.#.#.#.......#...#...#.....#.....#.....#...#...#.......#.#...#.#\n###.#####.#.#######.###.#.#.#.#.#.#####.#.#.#.#####.#.###.#.#####.#.#.#.#.#####.#.#.#.#.#.###.#.###.#.#####.#.#.#.#.###.#.#.#.###.#.#.#.#.###.#.#.###.#.#.#.#.#.#.#.#.#.#####.#.#.#.#\n#...#1......#.....#.#.#.#.....#.#.#.....#...#.#...#.......#...........#.............#...#.....#.......#.....#.....#.#.......#.#...#.#.#.#.......#...#.#...........#.#.....#...#.#...#\n#.#.###.#.###.#.#.#.#.#.#.#######.#.#.###.#.#.#.###.#####.###.#.#.#.#.#.###.#.#####.#.#.#####.#####.#.#.#.#.#.#.#.###.###.#.#####.#.#.#####.#.#.#.#.#.#.#.###.#####.###.#.#.#.#.###.#\n#.....#.#.....#.#...#.#.....#.#.#.#.........#.#.#.......#.#.#.......#...#...#...#.....#.#...#.......#.....#.......#...#.....#...#...#.......#...#.#.....#...#.#.....#.#...#.#...#...#\n#.#.#.#.#####.#.###.#.#.#.###.#.###.#.#.#####.#.#####.#.#.#.#.#####.#.#.#.###.#######.#.###.#.###.#.#.#.#.#.#.#####.###.#####.#.#.#.#.#####.#####.#.###.#.#.#.#.#.#.#.#####.###.#.###\n#...#.#...#.........#.#...#.#...#.....#.#.....#.......#.........#.....#.....#.........#.....#...#.#.#.#.....#.#.................#.#.#.......#.......#.......#...#...#.......#.#...#.#\n#.#.#.#.#.#.#.###.#.###.###.#.#.#.###.###.#.#.#.#.#.#.#########.#.###.#.#.#####.#.#.#.###.#######.#.###.#.#.#.#.#.#.#.###.#.#.###.#######.#.###.#.#.#.#.###.#.#.#.#####.###.#.#.###.#\n#...#.#.#.#.#...#...#...#.............#.....#.....#...#...#.#.....#...#...#.....#.#.....#...#...........#.#.#.#.......#...#.............#...#.#...#...........#...#2#...#.....#.#.#.#\n###.###.#.#####.#.#.#.#.#.#.#.#.#.#.###.###.#.#.#.###.###.#.#.#.#.#.#.###.###.#.#.#.#.###.#.#.#.###.#####.###.###.#.#.#.###.#######.###.###.#.#.#.#####.#####.###.#.#.#####.#.#.#.###\n#.......#...#...........#.......#...#.#.......#.....#.....#...#...#.#.........#.......#...#.#...#...........#.#...#.#...............#.#.#.....#.......#.#.#.#.....#.........#.#.#.#.#\n###.#.#.#.#.#.#.#####.###.#.#.#.#.#.#.#.#.#.#.#.#.#.#.#####.#.###.#.###.#.#.#.#########.###.#.###.#.###.#.#.#.#.#######.#####.###.#.#.#.#.#####.#####.#.#.#.#.#.#######.#.###.#.#.#.#\n#...#.....#.#.............#...#.#.....#.#...#.......#.........#...#...#.#...#...........#...#...........#...#...#.................#...#.#.#.....#.......#.#.#.......#...#...#...#...#\n###.#.#######.#.#.#.###.#.#.#.###.#.#.#.#.#.###.#####.#.###.#.#.#.###.#.#.#.#.#.#.#.###.#.#.#.#.#.#.#####.#.#####.#.#.#.#.#.#######.#.#.#.###.#.#.#.#.#.###.#.###.#########.###.#.#.#\n#.....#...#.....#.....#...#.........#.#...#.....#...#.................#...#.#.#.......#.....#...#.#.................#.#.#.........#.....#...#.#...#.....#.................#.#.....#.#\n#.#####.#.#.#####.###.#.#.#.###.###.#.#########.#.#######.###.###.#.#.#.#.#.#.#.###.#.#.#####.#.###.#.#########.#.###.###.#.###.###.#.#.#.#.#.###.#####.#.#.#######.#.###.#.#.###.###\n#0#...#.#...#...........#.#.............#.#.......#.....#.#.#.....#.#.#...#.....#.#.#.......#.#...#.................#.#.#.....#...#.#.........#.......#.#...#.......#.......#.....#.#\n#####.#.###.#.#.###.#####.###.#######.###.#.#.###.#.#.#.#.#.#.#.#.###.#.#.#.#.#.#.#.#.#####.###.#.#####.#.#.#.###.#.#.#.#########.#.#.#.###.#.#.###.#.#####.#.#.#.#.#.###.###.#.#.#.#\n#...#.#.....#.#.#...#.......#.#.#...#.........#.......#...#.#.....#.............#...........#...#.#.......#.#.....#.#...........#...#.........#.#...#.#.....#.......#...#.......#...#\n###.###.###.#.###.###.#.###.###.#.#.#.#########.#####.###.#######.#.###.#.#.#.###.#.#.#.#.#.#.#.#####.###.#.#.#.#.#.#.#####.###.#.#.###.#####.#.#.#####.#.#.###.#.#####.#.#.#.#.#.#.#\n#.......#...............#.....#...#...#.#...#.........#...........#.....#.....#.......#...#.....#.......#.#.#.#...#...............#.....#.....#...#.#...#...#.#.#.#.#.....#...#.#.#4#\n#.#.#.#.#.#####.###.#.#####.#.###.#.###.#.#.#.###.###.#.#####.#.#####.#.#######.#.#####.#.#######.#.###.#.#.#.###.###.###.#####.#.###.#.#.#.#####.#.#.#.###.#.#.###.###.#.#.#.#.#.###\n#...#...........#.......#...#.....#.#.......#.....#.........#.#.......#.#...#...#...........#.......#.....#...#...#...#.#...#.....#...#.........#...#...#.....#.....#...#...#...#...#\n###.#.###.#############.#.###.###.#.###.#.#.#.#.#.#.#.#.###.#####.#.#.#.#.#.#####.###.#.#.#.#.###.#.#.#.#.#.###.#.#.###.#.#.#.###.###.#.#.###.#.#.#.#.#.#.#####.#.#.#.#.#.#.###.#.###\n#...#.....#.#...#.#.#.#...........#.......#...#.....#...#...................#...#...#.#.#.#...#.......#...............#...#...#...#...#.#.#5#...#...#.#...#...#.#...#.#...#...#.#...#\n#.###.###.#.#.#.#.#.#.###.#.#######.#.#.#.###.#.#.#.#.#.#.###.#.###.###.#.#.#.#.#.###.#.#.#.#.#.###.#.#.###.#.#.###.#.#.#.#.#.#.#.#.#####.#.#.#######.#.#.#.#.#.#####.#.#######.#.#.#\n#.........#.#...#.#...#...#.............#.....#...#.#.#.#.#.#.....#.#...#.....#.#.#.........#.....#.........#.....#...........#...#.........#.....#...#.#.#.#...#...........#...#...#\n#.#.#.#######.#.#####.#.#.#.###.#.#######.#####.#.#.###.#.#.#.###.###.#.###.#.#.#.###.#.#.#.#####.#.###.#.#.#.#.#.#.#####.#.#.###.#.#.#.#.#####.###.#####.#.#.#.#.###.#.#.#####.#####\n#...#...............#.#.......#.......#.......#.........#.#.#.#...#...#...#.......#.#.....#.#...........#...#.#.#...........#.#...#.......#.........#...#...#.....#...#.#.....#.#...#\n###.#.#.#.#.#########.#.#.#.#.#.#####.#.#######.#.###.#.#.#.###.###.#.#.#.#.#.###.#.#.###.#.#####.#.###########.#.#.#####.#####.#####.#####.#.#.#.#.#.#.#####.#.#.#########.#.###.#.#\n#.#...#.....#.......#.....#...#.......#.#.#...#...#...#.........#...#...#.#...#.#.........#.#.......#.#.#...#...#.........#.#.........#.....#.#.#...#.......#.#.....#.......#.#.....#\n#.#.###.#.###.#.#.#.#.###.#########.#.#.#.#.#.#.###.#.#.#####.#.#.#####.#####.#.#.#########.#.#.#.###.#.#####.#.#.###.###.#.#.#.#.#.#####.###.#.###########.#.#.#.#.#.#######.#####.#\n#........7#.....#.#...#.#.#.#.........#...#.#...........#.....#.......#.........#.........#.....#.......#.#.......#.#.#...#...#.#.#....6#.#.........................#...#.#.......#.#\n#.###.#.###.###.###.#.#.###.###.#####.###.#.#.###.#####.###.#.###.#.#.#.#.#.#.#.#.#####.#.#.#####.#######.#.###.#.#.#####.#####.#.#.#.###.#.#.#.#.#####.#.#.###.#####.#.#.#.#.#.#.#.#\n#.#...#.#...#.#.....#.#.......#...#.....#...#...#...#...#.#.....#...#.#...#...#...#.#.............#.............#.#...#.............#.#.....#.....#.......#.#.#.#.........#...#...#.#\n#####################################################################################################################################################################################";
 
-    val map: List[List[String]] = longInput.linesIterator.map(_.map(_.toString).toList).toList
+    val map: Array[Array[Int]] = longInput.linesIterator.map(_.map(x => {
+      if (x == '#') -2
+      else if (x == '.') -1
+      else x.asDigit
+    }).toArray).toArray
 
     val locations: Map[Int, Location] = extractLocationsFromMap(map)
     println("Locations in map")
@@ -31,15 +35,16 @@ object AirDuctSpelunking {
     println("Shortest route")
     println(shortestRouteSteps)
     val t2 = System.currentTimeMillis()
-    println("Time 2: "+ (t2 - t1).toString +" miliseconds")
+    println("Time 2: " + (t2 - t1).toString + " miliseconds")
 
     /** Part 2 - Return to location 0 * */
     val shortestCircle = makeShortestRoute(locations, paths, 0, 0)
     println("Shortest route - return to 0")
     println(shortestCircle)
     val t3 = System.currentTimeMillis()
-    println("Time 3: "+ (t3 - t2).toString +" miliseconds")
-    println("Total time: "+ (t3 - t0).toString +" miliseconds")
+    println("Time 3: " + (t3 - t2).toString + " miliseconds")
+    println("Total time: " + (t3 - t0).toString + " miliseconds")
+
   }
 
   def makeShortestRoute(locations: Map[Int, Location], paths: Seq[Path], start: Int, finish: Int): Int = {
@@ -74,42 +79,43 @@ object AirDuctSpelunking {
     path.pathLength
   }
 
-  def shortestPath(map: List[List[String]], fromLocation: Location, toLocation: Location): Int = {
+  def shortestPath(map: Array[Array[Int]], fromLocation: Location, toLocation: Location): Int = {
+    // Set starting point and empty location - previous location
+    val mapWithStartingPoint = map.map(_.clone)
+    mapWithStartingPoint(fromLocation.y)(fromLocation.x) = 0
     val previousLocation = new Location(-1, -1)
-    val calculatedPaths = findAllPaths(map.updated(fromLocation.y, map(fromLocation.y).updated(fromLocation.x, "0")), fromLocation, previousLocation, fromLocation, toLocation, 0)
 
-    if (calculatedPaths.size > 0 && calculatedPaths(toLocation.y)(toLocation.x).toCharArray.head.isDigit) {
-      calculatedPaths(toLocation.y)(toLocation.x).toInt
-    }
-    else {
-      Int.MaxValue
-    }
+    val calculatedPaths = findAllPaths(mapWithStartingPoint, previousLocation, fromLocation, toLocation, 0)
+    calculatedPaths(toLocation.y)(toLocation.x)
   }
 
-  def findAllPaths(map: List[List[String]], startLocation: Location, previousLocation: Location, fromLocation: Location, toLocation: Location, steps: Int): List[List[String]] = {
-    var newMap = map
+  def findAllPaths(map: Array[Array[Int]], previousLocation: Location, fromLocation: Location, toLocation: Location, steps: Int): Array[Array[Int]] = {
     val neighborLocations = generateNeighborLocations(fromLocation, toLocation)
-    //    val minPath = Math.abs(toLocation.y - startLocation.y) + Math.abs(toLocation.x - startLocation.x)
 
-    neighborLocations.foldLeft(List[List[String]]())((acc, location) => {
-      val neighborPoint: String = newMap(location.y)(location.x)
-      val finishPointValue: Int = if (newMap(toLocation.y)(toLocation.x) == ".") Int.MaxValue else newMap(toLocation.y)(toLocation.x).toInt
+    neighborLocations.foldLeft(map)((acc, location) => {
+      val neighborPoint: Int = map(location.y)(location.x)
+      val finishPointValue: Int = if (map(toLocation.y)(toLocation.x) == -1) 1000 else map(toLocation.y)(toLocation.x)
       val remainingPath = Math.abs(toLocation.y - location.y) + Math.abs(toLocation.x - location.x)
 
       if (location.isEqual(toLocation)) {
-        if (neighborPoint == "." || (steps + 1 < neighborPoint.toInt)) {
-          newMap = newMap.updated(location.y, newMap(location.y).updated(location.x, (steps + 1).toString))
+        if (neighborPoint == -1 || (steps + 1 < neighborPoint)) {
+          map(location.y)(location.x) = steps + 1
+          map
+        }
+        else {
+          acc
         }
       }
       else if (isNextLocationValid(previousLocation, location, neighborPoint) && ((remainingPath + steps + 1) < finishPointValue)) {
-        if (neighborPoint == ".") {
-          newMap = findAllPaths(newMap.updated(location.y, newMap(location.y).updated(location.x, (steps + 1).toString)), startLocation, fromLocation, location, toLocation, (steps + 1))
-        }
-        else if (neighborPoint.toCharArray.head.isDigit && (steps + 1 < neighborPoint.toInt)) {
-          newMap = findAllPaths(newMap.updated(location.y, newMap(location.y).updated(location.x, (steps + 1).toString)), startLocation, fromLocation, location, toLocation, (steps + 1))
-        }
+        if (neighborPoint == -1 || (steps + 1 < neighborPoint)) {
+          map(location.y)(location.x) = steps + 1
+          findAllPaths(map, fromLocation, location, toLocation, (steps + 1))
+        } else
+          acc
       }
-      newMap
+      else {
+        acc
+      }
     })
   }
 
@@ -131,15 +137,15 @@ object AirDuctSpelunking {
       new Location(location.y - (firstY * directionY), location.x - (firstX * directionX)))
   }
 
-  def isNextLocationValid(previousLocation: Location, nextLocation: Location, point: String): Boolean = {
-    !previousLocation.isEqual(nextLocation) && (point.toCharArray.head.isDigit || point == ".")
+  def isNextLocationValid(previousLocation: Location, nextLocation: Location, point: Int): Boolean = {
+    !previousLocation.isEqual(nextLocation) && (point > -2)
   }
 
-  def removeLocationsFromMap(map: List[List[String]], locations: Map[Int, Location]): List[List[String]] = {
+  def removeLocationsFromMap(map: Array[Array[Int]], locations: Map[Int, Location]): Array[Array[Int]] = {
     map.map(row => {
       row.map(location => {
-        if (location.toCharArray.head.isDigit) {
-          "."
+        if (location >= 0) {
+          -1
         }
         else {
           location
@@ -148,14 +154,14 @@ object AirDuctSpelunking {
     })
   }
 
-  def extractLocationsFromMap(map: List[List[String]]): Map[Int, Location] = {
+  def extractLocationsFromMap(map: Array[Array[Int]]): Map[Int, Location] = {
     val mapWidth = map(0).size
 
     (0 to (map.flatten.size - 1)).map(i => {
       val y = (i / mapWidth)
       val x = (i % mapWidth)
-      if (map(y)(x).toCharArray.head.isDigit) {
-        Tuple2(map(y)(x).toCharArray.head.asDigit, new Location(y, x))
+      if (map(y)(x) >= 0) {
+        Tuple2(map(y)(x), new Location(y, x))
       }
       else {
         Tuple2(Integer.MIN_VALUE, new Location(0, 0))
@@ -163,19 +169,22 @@ object AirDuctSpelunking {
     }).toMap.filter(_._1 >= 0)
   }
 
-  def printMap(map: List[List[String]]): Unit = {
-    map.map(x => {
-      x.map(y => {
-        if (y.length == 1) {
+  def printMap(map: Array[Array[Int]]): Unit = {
+    map.foreach(x => {
+      x.foreach(y =>
+        if (y < 0) {
+          print(s"$y ")
+        }
+        else if (y < 10) {
           print(s" $y ")
         }
-        else if (y.length == 2) {
-          print(s" $y")
+        else if (y < 100) {
+          print(s"$y ")
         }
         else {
           print(y)
         }
-      })
+      )
       println()
     })
   }

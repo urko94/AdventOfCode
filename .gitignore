@@ -1,2 +1,6 @@
 *.class
 *.log
+/.idea/compiler.xml
+/.idea/uiDesigner.xml
+/src/2016/24/MultiThreading/
+/src/2016/20/1/FirewallRules_1_MemmoryProblems.scala
