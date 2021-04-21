@@ -14,7 +14,6 @@ object TwoStepsForward {
 
     val grid: Array[Array[Char]] = gridText.linesIterator.map(_.toCharArray).toArray
     val finishLocation = new Location(grid.size - 2, grid(0).size - 2)
-    printGrid(grid)
 
     /**
      * PART 1
@@ -23,8 +22,7 @@ object TwoStepsForward {
 
     if(shortestPaths.size == 0){
       println("NO RESULT")
-    }
-    else {
+    } else {
       val shortestPath = shortestPaths.sortBy(x => x.size).head
       println("Shortest path:")
       println(shortestPath)
@@ -37,8 +35,7 @@ object TwoStepsForward {
 
     if(allPaths.size == 0){
       println("NO RESULT")
-    }
-    else {
+    } else {
       val longestPath = allPaths.sortBy(x => x.size).last
       println("Longest path:")
       println(longestPath)
@@ -53,8 +50,7 @@ object TwoStepsForward {
     directions.keySet.foldLeft(paths)((paths, i) => {
       if (directions(i).isEqual(finishLocation)) {
         paths :+ (path + i)
-      }
-      else {
+      } else {
         makeAllPaths(grid, directions(i), finishLocation, passcode + i, path + i, paths)
       }
     })
@@ -66,11 +62,9 @@ object TwoStepsForward {
     directions.keySet.foldLeft(paths)((paths, i) => {
       if (directions(i).isEqual(finishLocation)) {
         paths :+ (path + i)
-      }
-      else if (paths.size == 0 || path.size < paths.map(_.size).min) {
+      } else if (paths.size == 0 || path.size < paths.map(_.size).min) {
         makeShortestPaths(grid, directions(i), finishLocation, passcode + i, path + i, paths)
-      }
-      else {
+      } else {
         paths
       }
     })
@@ -79,6 +73,7 @@ object TwoStepsForward {
   def prepareLocations(grid: Array[Array[Char]], location: Location, passcode: String): Map[Char, Location] = {
     val directionsPermissions = validDirectionsOfPasscode(passcode)
     val directions = Seq('U', 'D', 'L', 'R')
+
     (0 to directions.size - 1).foldLeft(Map[Char, Location]())((acc, i) => {
       val yVal = (if (i < 2) 1 else 0) * (if (i % 2 == 0) -1 else 1)
       val xVal = (if (i < 2) 0 else 1) * (if (i % 2 == 0) -1 else 1)
@@ -88,8 +83,7 @@ object TwoStepsForward {
 
       if (directionsPermissions(i) && locationInGrid && grid(location.y + yVal)(location.x + xVal) != '#') {
         acc + (directions(i) -> new Location(y, x))
-      }
-      else {
+      } else {
         acc
       }
     })
@@ -109,23 +103,7 @@ object TwoStepsForward {
   }
 
   def md5(text: String): String = {
-    MessageDigest.getInstance("MD5").digest(text.getBytes()).map(0xFF & _).map {
-      "%02x".format(_)
-    }.foldLeft("") {
-      _ + _
-    }
+    MessageDigest.getInstance("MD5").digest(text.getBytes()).map(0xFF & _).map { "%02x".format(_) }.foldLeft("") { _ + _ }
   }
 
-  def hash(str: String): String = {
-    MessageDigest.getInstance("MD5").digest(str.getBytes).map("%02X".format(_)).mkString
-  }
-
-  def printGrid(map: Array[Array[Char]]): Unit = {
-    map.foreach(x => {
-      x.foreach(y =>
-        print(s"$y ")
-      )
-      println()
-    })
-  }
 }

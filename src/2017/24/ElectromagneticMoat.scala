@@ -32,12 +32,10 @@ object ElectromagneticMoat {
 
         if(remainingPorts.flatten.contains(nextPortType)) {
           acc ++ buildBridges(remainingPorts, (partOfBridge :+ port), nextPortType)
-        }
-        else {
+        } else {
           acc :+ (partOfBridge :+ port)
         }
-      }
-      else {
+      } else {
         acc
       }
     })

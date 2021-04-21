@@ -27,11 +27,9 @@ object NoSuchThingAsTooMuch {
     containers.foldLeft(Seq[List[Int]]())((acc, element) => {
       if(combination.sum + element._2 == litersOfEggnog){
         acc :+ (combination :+ element._2)
-      }
-      else if(combination.sum + element._2 < litersOfEggnog && combination.size+1 < containerLimit){
+      } else if(combination.sum + element._2 < litersOfEggnog && combination.size+1 < containerLimit){
         acc ++ combineContainers(containers.view.filterKeys(_ > element._1).toMap, (combination :+ element._2), litersOfEggnog, containerLimit)
-      }
-      else {
+      } else {
         acc
       }
     })

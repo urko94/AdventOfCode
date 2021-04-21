@@ -40,20 +40,17 @@ object FirewallRules {
       if (currentRange.size == 0) {
         currentRange = element
         acc
-      }
-      else {
+      } else {
         if (currentRange.last + 1 >= element.head) {
           currentRange = Set(currentRange.head, Math.max(element.last, currentRange.last))
           acc
-        }
-        else {
+        } else {
           val groupedRange = currentRange;
           currentRange = element
 
           if(element.last == "4294967295".toLong){
             acc :+ groupedRange :+ element
-          }
-          else {
+          } else {
             acc :+ groupedRange
           }
         }

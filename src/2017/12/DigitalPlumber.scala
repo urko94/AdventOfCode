@@ -17,8 +17,7 @@ object DigitalPlumber {
     val groups = programs.foldLeft(List[Set[Int]]())((acc, element) => {
       if (!acc.flatten.contains(element._1)) {
         acc :+ programGroupFromPrograms(programs, Set[Int](), element._1)
-      }
-      else {
+      } else {
         acc
       }
     })

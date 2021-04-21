@@ -51,8 +51,7 @@ object AirDuctSpelunking {
     if (locations.contains(start)) {
       val routes = allRoutes(locations.removed(start), paths, start, finish, 0)
       routes.min
-    }
-    else {
+    } else {
       println("Start position is not on map")
       -1
     }
@@ -64,11 +63,9 @@ object AirDuctSpelunking {
       if (locations.size == 1) {
         val lastStepLength = if (lastLocation >= 0) lengthBetweenLocations(locationId, lastLocation, paths) else 0
         acc :+ (steps + pathLength + lastStepLength)
-      }
-      else if ((locations.size > 1) && (acc.size == 0 || acc.min > (steps + pathLength))) {
+      } else if ((locations.size > 1) && (acc.size == 0 || acc.min > (steps + pathLength))) {
         acc ++ allRoutes(locations.removed(locationId), paths, locationId, lastLocation, (steps + pathLength))
-      }
-      else {
+      } else {
         acc
       }
     })
@@ -101,19 +98,17 @@ object AirDuctSpelunking {
         if (neighborPoint == -1 || (steps + 1 < neighborPoint)) {
           map(location.y)(location.x) = steps + 1
           map
-        }
-        else {
+        } else {
           acc
         }
-      }
-      else if (isNextLocationValid(previousLocation, location, neighborPoint) && ((remainingPath + steps + 1) < finishPointValue)) {
+      } else if (isNextLocationValid(previousLocation, location, neighborPoint) && ((remainingPath + steps + 1) < finishPointValue)) {
         if (neighborPoint == -1 || (steps + 1 < neighborPoint)) {
           map(location.y)(location.x) = steps + 1
           findAllPaths(map, fromLocation, location, toLocation, (steps + 1))
-        } else
+        } else {
           acc
-      }
-      else {
+        }
+      } else {
         acc
       }
     })
@@ -146,8 +141,7 @@ object AirDuctSpelunking {
       row.map(location => {
         if (location >= 0) {
           -1
-        }
-        else {
+        } else {
           location
         }
       })
@@ -162,31 +156,10 @@ object AirDuctSpelunking {
       val x = (i % mapWidth)
       if (map(y)(x) >= 0) {
         Tuple2(map(y)(x), new Location(y, x))
-      }
-      else {
+      } else {
         Tuple2(Integer.MIN_VALUE, new Location(0, 0))
       }
     }).toMap.filter(_._1 >= 0)
-  }
-
-  def printMap(map: Array[Array[Int]]): Unit = {
-    map.foreach(x => {
-      x.foreach(y =>
-        if (y < 0) {
-          print(s"$y ")
-        }
-        else if (y < 10) {
-          print(s" $y ")
-        }
-        else if (y < 100) {
-          print(s"$y ")
-        }
-        else {
-          print(y)
-        }
-      )
-      println()
-    })
   }
 }
 
