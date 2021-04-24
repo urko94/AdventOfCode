@@ -1,7 +1,19 @@
-import AdventOfCode.Location
-import AdventOfCode.Path
 
 object AirDuctSpelunking {
+
+  case class Path(from: Int, to: Int, length: Int)
+
+  case class Location(y: Int, x: Int)
+
+  def equalLocations(previousLocation: Location, nextLocation: Location): Boolean = {
+    previousLocation match {
+      case Location(y, x) if (y == nextLocation.y && x == nextLocation.x) =>
+        true
+      case Location(_,_) =>
+        false
+    }
+  }
+
 
   def main(args: Array[String]) {
 
@@ -15,46 +27,32 @@ object AirDuctSpelunking {
     }).toArray).toArray
 
     val locations: Map[Int, Location] = extractLocationsFromMap(map)
-    println("Locations in map")
-    println(locations)
 
     val mapWithoutLocations = removeLocationsFromMap(map, locations)
-    val t0 = System.currentTimeMillis()
 
+    /** Calculate all path lengths  */
     val paths: Seq[Path] = locations.keySet.map(i => {
       locations.keySet.filter(_ > i).map(j => {
-        new Path(i, j, shortestPath(mapWithoutLocations, locations(i), locations(j)))
+        Path(i, j, shortestPath(mapWithoutLocations, locations(i), locations(j)))
       })
     }).toSeq.flatten
-    println("Shortest paths between locations")
-    println(paths)
-    val t1 = System.currentTimeMillis()
-    println("Time 1: "+ (t1 - t0).toString +" miliseconds")
 
-    val shortestRouteSteps = makeShortestRoute(locations, paths, 0, -1)
+    /** Part 1 - Shortest route from location 0 **/
+    val shortestRouteLengthSteps = shortestRouteLength(locations, paths, 0, -1)
     println("Shortest route")
-    println(shortestRouteSteps)
-    val t2 = System.currentTimeMillis()
-    println("Time 2: " + (t2 - t1).toString + " miliseconds")
+    println(shortestRouteLengthSteps)
 
-    /** Part 2 - Return to location 0 * */
-    val shortestCircle = makeShortestRoute(locations, paths, 0, 0)
+
+    /** Part 2 - Return to location 0 **/
+    val shortestCircle = shortestRouteLength(locations, paths, 0, 0)
     println("Shortest route - return to 0")
     println(shortestCircle)
-    val t3 = System.currentTimeMillis()
-    println("Time 3: " + (t3 - t2).toString + " miliseconds")
-    println("Total time: " + (t3 - t0).toString + " miliseconds")
 
   }
 
-  def makeShortestRoute(locations: Map[Int, Location], paths: Seq[Path], start: Int, finish: Int): Int = {
-    if (locations.contains(start)) {
-      val routes = allRoutes(locations.removed(start), paths, start, finish, 0)
-      routes.min
-    } else {
-      println("Start position is not on map")
-      -1
-    }
+  def shortestRouteLength(locations: Map[Int, Location], paths: Seq[Path], start: Int, finish: Int): Int = {
+    val routes = allRoutes(locations.removed(start), paths, start, finish, 0)
+    routes.min
   }
 
   def allRoutes(locations: Map[Int, Location], paths: Seq[Path], previousLocation: Int, lastLocation: Int, steps: Int): Seq[Int] = {
@@ -72,15 +70,15 @@ object AirDuctSpelunking {
   }
 
   def lengthBetweenLocations(location1: Int, location2: Int, paths: Seq[Path]): Int = {
-    val path: Path = paths.filter(x => (x.fromPoint == location1 && x.toPoint == location2) || (x.toPoint == location1 && x.fromPoint == location2)).head
-    path.pathLength
+    val path: Path = paths.filter(x => (x.from == location1 && x.to == location2) || (x.to == location1 && x.from == location2)).head
+    path.length
   }
 
   def shortestPath(map: Array[Array[Int]], fromLocation: Location, toLocation: Location): Int = {
     // Set starting point and empty location - previous location
     val mapWithStartingPoint = map.map(_.clone)
     mapWithStartingPoint(fromLocation.y)(fromLocation.x) = 0
-    val previousLocation = new Location(-1, -1)
+    val previousLocation = Location(-1, -1)
 
     val calculatedPaths = findAllPaths(mapWithStartingPoint, previousLocation, fromLocation, toLocation, 0)
     calculatedPaths(toLocation.y)(toLocation.x)
@@ -94,7 +92,7 @@ object AirDuctSpelunking {
       val finishPointValue: Int = if (map(toLocation.y)(toLocation.x) == -1) 1000 else map(toLocation.y)(toLocation.x)
       val remainingPath = Math.abs(toLocation.y - location.y) + Math.abs(toLocation.x - location.x)
 
-      if (location.isEqual(toLocation)) {
+      if (equalLocations(location, toLocation)) {
         if (neighborPoint == -1 || (steps + 1 < neighborPoint)) {
           map(location.y)(location.x) = steps + 1
           map
@@ -126,14 +124,14 @@ object AirDuctSpelunking {
     val firstX = if (Math.abs(diffY) > Math.abs(diffX)) 0 else 1
 
     Seq(
-      new Location(location.y + (firstY * directionY), location.x + (firstX * directionX)),
-      new Location(location.y + (firstX * directionY), location.x + (firstY * directionX)),
-      new Location(location.y - (firstX * directionY), location.x - (firstY * directionX)),
-      new Location(location.y - (firstY * directionY), location.x - (firstX * directionX)))
+      Location(location.y + (firstY * directionY), location.x + (firstX * directionX)),
+      Location(location.y + (firstX * directionY), location.x + (firstY * directionX)),
+      Location(location.y - (firstX * directionY), location.x - (firstY * directionX)),
+      Location(location.y - (firstY * directionY), location.x - (firstX * directionX)))
   }
 
   def isNextLocationValid(previousLocation: Location, nextLocation: Location, point: Int): Boolean = {
-    !previousLocation.isEqual(nextLocation) && (point > -2)
+    !equalLocations(previousLocation, nextLocation) && (point > -2)
   }
 
   def removeLocationsFromMap(map: Array[Array[Int]], locations: Map[Int, Location]): Array[Array[Int]] = {
@@ -155,9 +153,9 @@ object AirDuctSpelunking {
       val y = (i / mapWidth)
       val x = (i % mapWidth)
       if (map(y)(x) >= 0) {
-        Tuple2(map(y)(x), new Location(y, x))
+        map(y)(x) -> Location(y, x)
       } else {
-        Tuple2(Integer.MIN_VALUE, new Location(0, 0))
+        Integer.MIN_VALUE -> Location(0, 0)
       }
     }).toMap.filter(_._1 >= 0)
   }

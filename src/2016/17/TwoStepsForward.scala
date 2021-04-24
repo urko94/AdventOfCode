@@ -1,7 +1,18 @@
 import java.security.MessageDigest
-import AdventOfCode.Location
 
 object TwoStepsForward {
+
+  case class Location(y: Int, x: Int)
+
+  def equalLocations(previousLocation: Location, nextLocation: Location): Boolean = {
+    previousLocation match {
+      case Location(y, x) if (y == nextLocation.y && x == nextLocation.x) =>
+        true
+      case Location(_,_) =>
+        false
+    }
+  }
+
 
   def main(args: Array[String]) {
 
@@ -13,12 +24,12 @@ object TwoStepsForward {
     val passcodeTest: String = "hijkl"
 
     val grid: Array[Array[Char]] = gridText.linesIterator.map(_.toCharArray).toArray
-    val finishLocation = new Location(grid.size - 2, grid(0).size - 2)
+    val finishLocation = Location(grid.size - 2, grid(0).size - 2)
 
     /**
      * PART 1
      */
-    val shortestPaths = makeShortestPaths(grid, new Location(1, 1), finishLocation, passcode, "", Seq())
+    val shortestPaths = makeAllPaths(grid, Location(1, 1), finishLocation, passcode, "", Seq())
 
     if(shortestPaths.size == 0){
       println("NO RESULT")
@@ -31,7 +42,7 @@ object TwoStepsForward {
     /**
      * PART 2
      */
-    val allPaths = makeAllPaths(grid, new Location(1, 1), finishLocation, passcode, "", Seq())
+    val allPaths = makeAllPaths(grid, Location(1, 1), finishLocation, passcode, "", Seq())
 
     if(allPaths.size == 0){
       println("NO RESULT")
@@ -48,24 +59,10 @@ object TwoStepsForward {
 
     val directions = prepareLocations(grid, location, passcode)
     directions.keySet.foldLeft(paths)((paths, i) => {
-      if (directions(i).isEqual(finishLocation)) {
+      if (equalLocations(directions(i), finishLocation)) {
         paths :+ (path + i)
       } else {
         makeAllPaths(grid, directions(i), finishLocation, passcode + i, path + i, paths)
-      }
-    })
-  }
-
-  def makeShortestPaths(grid: Array[Array[Char]], location: Location, finishLocation: Location, passcode: String, path: String, paths: Seq[String]): Seq[String] = {
-
-    val directions = prepareLocations(grid, location, passcode)
-    directions.keySet.foldLeft(paths)((paths, i) => {
-      if (directions(i).isEqual(finishLocation)) {
-        paths :+ (path + i)
-      } else if (paths.size == 0 || path.size < paths.map(_.size).min) {
-        makeShortestPaths(grid, directions(i), finishLocation, passcode + i, path + i, paths)
-      } else {
-        paths
       }
     })
   }
@@ -82,7 +79,7 @@ object TwoStepsForward {
       val locationInGrid = coordinatesInsideGrid(grid, y, x)
 
       if (directionsPermissions(i) && locationInGrid && grid(location.y + yVal)(location.x + xVal) != '#') {
-        acc + (directions(i) -> new Location(y, x))
+        acc + (directions(i) -> Location(y, x))
       } else {
         acc
       }
