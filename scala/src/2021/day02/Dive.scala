@@ -1,5 +1,3 @@
-package aoc21.day02
-
 import scala.io.Source
 
 case class Position(horizontal: Long, depth: Long, aim: Long)
@@ -9,7 +7,7 @@ case class Action(direction: String, steps: Long)
 
 object Dive {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val inputText: Seq[Action] = Source.fromResource("day02-input.txt").getLines().map(x => {
       val Array(direction, length) = x.split(" ")

@@ -1,5 +1,6 @@
 *.class
 *.log
+/out/
 /.idea/compiler.xml
 /.idea/uiDesigner.xml
 /src/2016/24/MultiThreading/

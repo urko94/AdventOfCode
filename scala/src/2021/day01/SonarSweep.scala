@@ -4,7 +4,7 @@ import scala.io.Source
 
 object SonarSweep {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val inputReport: Array[Int] = Source.fromResource("day01-input.txt").getLines().map(Integer.parseInt).toArray[Int]
 

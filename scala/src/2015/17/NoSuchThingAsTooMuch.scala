@@ -2,7 +2,7 @@
 
 object NoSuchThingAsTooMuch {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val litersOfEggnog: Int = 150
     val input: String = "20\n15\n10\n5\n5"

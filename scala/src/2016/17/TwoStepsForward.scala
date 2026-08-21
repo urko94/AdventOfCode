@@ -13,8 +13,7 @@ object TwoStepsForward {
     }
   }
 
-
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val gridText: String = "#########\n#S| | | #\n#-#-#-#-#\n# | | | #\n#-#-#-#-#\n# | | | #\n#-#-#-#-#\n# | | |  \n####### V"
     val passcode: String = "awrkjxxr"
